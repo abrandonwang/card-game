@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "Satoshi";
+    src: url("../../satoshi_complete/OTF/Satoshi-Regular.otf") format("opentype"),
+            url("../../satoshi_complete/TTF/Satoshi-Variable.ttf") format("truetype"),
+            url("../../satoshi_complete/WEB/fonts/Satoshi-Regular.eot") format("embedded-opentype"),;
+}
+
+body, header{
+    font-family: "Satoshi", sans-serif;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-primary);
+}
+
+body {
+    height: 100vh;
+}
+
+:root {
+    /* Dark theme - warm autumn night aesthetic */
+    --bg-primary: #1a1512;
+    --bg-secondary: #2a211c;
+    --text-primary: #f5f1ed;
+    --text-secondary: #b8a99d;
+    --accent: #d4916f;
+    --accent-hover: #e6a586;
+    --accent-light: #3d2e28;
+    --border: rgba(212, 145, 111, 0.15);
+    --shadow: rgba(0, 0, 0, 0.3);
+    --card-bg: rgba(42, 33, 28, 0.85);
+    --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --name-color: #e6a586;
+    --3d-highlight: rgba(255, 255, 255, 0.05);
+    --3d-shadow: rgba(0, 0, 0, 0.4);
+    --cursor-primary: #d4916f;
+    --cursor-secondary: #e6a586;
+    --gradient-keyboard: linear-gradient(135deg, #c97456 0%, #a85a3f 100%);
+    --gradient-algorithm: linear-gradient(135deg, #d4a574 0%, #b8885f 100%);
+    --gradient-password: linear-gradient(135deg, #8b9a7e 0%, #6f7d64 100%);
+    --gradient-website: linear-gradient(135deg, #b88b6f 0%, #9d7358 100%);
+    --grid-cols: 3;
+    --grid-rows: 4;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 2rem 3rem;
+}
+
+.nav-container a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    text-align: end;
+}
+
+.drop-down-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.drop-down, .drop-down-content {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    margin: -2rem auto 0 auto;
+    width: 60vw;
+    height: 80vh;
+    gap: 2rem;
+}
+
+.card {
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-front {
+    background: var(--accent);
+    font-size: 5rem;
+    color: var(--text-primary);
+}
+
+.card-back {
+    background: var(--bg-secondary);
+    transform: rotateY(180deg);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}

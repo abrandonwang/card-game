@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "card-game",
+			"path": "."
+		},
+		{
+			"name": "Satoshi_Complete",
+			"path": "../../../Downloads/Satoshi_Complete"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "card-game"
+	}
+}
