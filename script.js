@@ -55,6 +55,7 @@ function updateSize(rows, cols) {
     for (let i = 0; i < totalCards; i++) {
         const cardBack = cards[i].querySelector('.card-back');
         cardBack.style.background = cardColors[color_arr[i]];
+        cardBack.textContent = cardColors[color_arr[i]];
     }
 }
 
@@ -67,4 +68,8 @@ function fisher_yates (arr) {
     }
     console.log(arr);
     return arr;
+}
+
+function toggle() {
+    document.querySelector('.drop-down').classList.toggle('open');
 }

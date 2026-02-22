@@ -1,8 +1,7 @@
 @font-face {
     font-family: "Satoshi";
-    src: url("../../satoshi_complete/OTF/Satoshi-Regular.otf") format("opentype"),
-            url("../../satoshi_complete/TTF/Satoshi-Variable.ttf") format("truetype"),
-            url("../../satoshi_complete/WEB/fonts/Satoshi-Regular.eot") format("embedded-opentype"),;
+    src: url("../../Satoshi_complete/OTF/Satoshi-Regular.otf") format("opentype"),
+            url("../../Satoshi_complete/TTF/Satoshi-Variable.ttf") format("truetype"),
 }
 
 body, header{
@@ -11,6 +10,7 @@ body, header{
     margin: 0;
     padding: 0;
     background: var(--bg-primary);
+    text-underline-offset: 3px;
 }
 
 body {
@@ -18,27 +18,18 @@ body {
 }
 
 :root {
-    /* Dark theme - warm autumn night aesthetic */
-    --bg-primary: #1a1512;
-    --bg-secondary: #2a211c;
-    --text-primary: #f5f1ed;
-    --text-secondary: #b8a99d;
-    --accent: #d4916f;
-    --accent-hover: #e6a586;
-    --accent-light: #3d2e28;
-    --border: rgba(212, 145, 111, 0.15);
-    --shadow: rgba(0, 0, 0, 0.3);
-    --card-bg: rgba(42, 33, 28, 0.85);
-    --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-    --name-color: #e6a586;
-    --3d-highlight: rgba(255, 255, 255, 0.05);
-    --3d-shadow: rgba(0, 0, 0, 0.4);
-    --cursor-primary: #d4916f;
-    --cursor-secondary: #e6a586;
-    --gradient-keyboard: linear-gradient(135deg, #c97456 0%, #a85a3f 100%);
-    --gradient-algorithm: linear-gradient(135deg, #d4a574 0%, #b8885f 100%);
-    --gradient-password: linear-gradient(135deg, #8b9a7e 0%, #6f7d64 100%);
-    --gradient-website: linear-gradient(135deg, #b88b6f 0%, #9d7358 100%);
+    --bg-primary: #f7f7f8;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --text-primary: #111111;
+    --text-secondary: #888888;
+    --accent: #5b5bd6;
+    --accent-hover: #6e6ede;
+    --border: rgba(0, 0, 0, 0.08);
+    --border-strong: rgba(0, 0, 0, 0.15);
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.1);
+    --gradient-card-front: linear-gradient(160deg, #ffffff 0%, #f7f7f8 100%);
     --grid-cols: 3;
     --grid-rows: 4;
 }
@@ -52,26 +43,63 @@ body {
 
 .nav-container a {
     color: var(--text-secondary);
-    text-decoration: none;
-    text-align: end;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nav-container a:hover {
+    color: var(--text-primary);
 }
 
 .drop-down-container {
     display: flex;
     flex-direction: column;
+
 }
 
-.drop-down, .drop-down-content {
+.drop-down {
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    position: relative;
+    text-align: right;
 }
+
+.drop-down-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: .5rem;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transition: max-height 0.3s ease;
+}
+
+.drop-down.open .drop-down-content {
+    max-height: 5rem;
+}
+
+.drop-down > a::before {
+    content: '›';
+    display: inline-block;
+    margin-right: 4px;
+    rotate: 90deg;
+    transition: rotate 0.2s ease;
+}
+
+.drop-down.open > a::before {
+    rotate: -90deg;
+}
+
 
 .game-container {
     display: grid;
     grid-template-columns: repeat(var(--grid-cols), 1fr);
     grid-template-rows: repeat(var(--grid-rows), 1fr);
-    margin: -2rem auto 0 auto;
+    margin: 0 auto;
     width: 60vw;
     height: 80vh;
     gap: 2rem;
@@ -102,13 +130,19 @@ body {
 }
 
 .card-front {
-    background: var(--accent);
-    font-size: 5rem;
-    color: var(--text-primary);
+    background: var(--gradient-card-front);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease;
+}
+
+.card-front:hover {
+    box-shadow: var(--shadow-hover);
 }
 
 .card-back {
-    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
     transform: rotateY(180deg);
 }
 
