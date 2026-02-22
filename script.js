@@ -1,15 +1,21 @@
 const gameContainer = document.getElementById('game-container');
 let totalCards;
+let numCorrect;
+let currentNum = 0;
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
 
 const cardColors = [
     '#d7d9b1', '#84acce', '#114b5f', '#1a936f', '#ff6663',
     '#4b7c97', '#aec3c0', '#8d7d69', '#c67266', '#62866c',
     '#da3b17', '#c4d024', '#22c124', '#ca2ba5', '#4620b6'
 ]; // Size is 15
-
 updateSize(3, 4);
 
 function updateSize(rows, cols) {
+    reset();
+    numCorrect = 0;
     gameContainer.innerHTML = '';
     document.documentElement.style.setProperty('--grid-cols', cols);
     document.documentElement.style.setProperty('--grid-rows', rows);
@@ -34,7 +40,15 @@ function updateSize(rows, cols) {
         card.appendChild(cardInner);
 
         card.addEventListener('click', () => {
-            card.classList.toggle('flipped');
+            if (lockBoard || card === firstCard) return;
+            card.classList.add('flipped');
+
+            if (!firstCard) {
+                firstCard = card
+            } else {
+                secondCard = card;
+                checkMatch();
+            }
         })
         gameContainer.appendChild(card);
     }
@@ -72,4 +86,49 @@ function fisher_yates (arr) {
 
 function toggle() {
     document.querySelector('.drop-down').classList.toggle('open');
+}
+
+function reset() {
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+}
+
+function checkMatch() {
+    const first = firstCard.querySelector('.card-back');
+    const second = secondCard.querySelector('.card-back');
+
+    if (first.style.background === second.style.background) {
+        firstCard.classList.add('matched');
+        secondCard.classList.add('matched');
+        numCorrect++;
+        reset();
+        if (numCorrect == totalCards / 2) {
+            gameOver();
+        }
+    } else {
+        lockBoard = true;
+        setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            reset();
+        }, 1000);
+    }
+}
+
+
+function gameOver() {
+    // Match like cards together, show you beat the game screen!
+    setTimeout(() => {
+        document.querySelectorAll('.card').forEach(card => {
+            card.querySelector('.card-front').style.background = "var(--accent)";
+            card.querySelector('.card-front').textContent = "";
+            card.classList.remove('flipped');
+        });
+        setTimeout(() => {
+            gameContainer.classList.add('completed');
+        }, 700);
+    }, 1500); // for now
+    
+    return;
 }
