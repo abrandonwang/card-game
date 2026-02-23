@@ -10,15 +10,19 @@
 <body>
     <header>
         <div class = "nav-container">
-            <div class = "drop-down-container">
-                <div class = "drop-down">
-                    <a onclick = "toggle()" href="#">Difficulty</a>
-                    <div class = "drop-down-content">
-                        <a onclick = "updateSize(3,4)" href="#">Easy</a>
-                        <a onclick = "updateSize(4,4)" href="#">Medium</a>
-                        <a onclick = "updateSize(4,5)" href="#">Hard</a>
-                    </div>
-                </div>
+            <div class = "drop-down">
+                <button onclick = "updateSize(3,4)" href="#">
+                    <div class = "top"> Easy </div>
+                    <div class = "bottom"></div>
+                </button>
+                <button onclick = "updateSize(4,4)" href="#">
+                    <div class = "top"> Normal </div>
+                    <div class = "bottom"></div>
+                </button>
+                <button onclick = "updateSize(4,5)" href="#">
+                    <div class = "top"> Hard </div>
+                    <div class = "bottom"></div>
+                </button>
             </div>
         </div>
     </header>

@@ -9,12 +9,13 @@ body, header{
     font-weight: bold;
     margin: 0;
     padding: 0;
-    background: color-mix(in srgb, var(--accent) 60%, white);
+    background: var(--bg-primary);
     text-underline-offset: 3px;
 }
 
 body {
     height: 100vh;
+    position: relative;
 }
 
 :root {
@@ -35,76 +36,116 @@ body {
 }
 
 .nav-container {
+    position: fixed;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button {
+    width: 140px;
+    height: 50px;
+    position: relative;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    isolation: isolate;
+}
+
+.top {
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 238);
+    font-size: 16px;
+    color: rgb(36, 38, 34);
     display: flex;
     align-items: center;
-    justify-content: end;
-    padding: 2rem 3rem;
+    justify-content: center;
+    border-radius: 7mm;
+    outline: 2px solid rgb(36, 38, 34);
+    transition: 0.2s;
+    position: relative;
+    overflow: hidden;
 }
 
-.nav-container a {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
+.bottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(229, 229, 199);
+    top: 10px;
+    left: 0;
+    border-radius: 7mm;
+    outline: 2px solid rgb(36, 38, 34);
+    z-index: -1;
 }
-
-.nav-container a:hover {
-    color: var(--text-primary);
+.bottom::before {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 9px;
+    background: rgb(36, 38, 34);
+    bottom: 0;
+    left: 15%;
 }
-
-.drop-down-container {
-    display: flex;
-    flex-direction: column;
-
+.bottom::after {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 9px;
+    background: rgb(36, 38, 34);
+    bottom: 0;
+    left: 85%;
+}
+button:active .top {
+    transform: translateY(10px);
+}
+button::before {
+    position: absolute;
+    content: "";
+    width: calc(100% + 2px);
+    height: 100%;
+    background: rgb(140, 140, 140);
+    top: 14px;
+    left: -1px;
+    border-radius: 7mm;
+    outline: 2px solid rgb(36, 38, 34);
+    z-index: -1;
+}
+.top::before {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transform: skewX(30deg);
+    left: -20px;
+    transition: 0.25s;
+}
+button:active .top::before {
+    left: calc(100% + 20px);
 }
 
 .drop-down {
-    font-size: 1rem;
     display: flex;
     flex-direction: column;
-    position: relative;
-    text-align: right;
+    gap: 1.5rem;
 }
-
-.drop-down-content {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    gap: .5rem;
-    max-height: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    transition: max-height 0.3s ease;
-}
-
-.drop-down.open .drop-down-content {
-    max-height: 5rem;
-}
-
-.drop-down > a::before {
-    content: '›';
-    display: inline-block;
-    margin-right: 4px;
-    rotate: 90deg;
-    transition: rotate 0.2s ease;
-}
-
-.drop-down.open > a::before {
-    rotate: -90deg;
-}
-
 
 .game-container {
     display: grid;
     grid-template-columns: repeat(var(--grid-cols), 1fr);
     grid-template-rows: repeat(var(--grid-rows), 1fr);
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 100px);
+    transform: translate(-50%, -50%);
     width: 60vw;
     height: 80vh;
     gap: 2rem;
     transition: gap 0.6s ease;
-    position: relative;
 }
 
 .game-container.completed {
@@ -177,8 +218,8 @@ body {
 }
 
 .card-front {
-    background: var(--gradient-card-front);
-    border: 1px solid var(--border);
+    background: rgb(255, 255, 238);
+    border: 2px solid rgb(36, 38, 34);
     box-shadow: var(--shadow);
     transition: box-shadow 0.2s ease;
 }
@@ -200,4 +241,13 @@ body {
 .message {
     font-size: 40px;
     color: var(--text-primary);
+    padding: 2rem 4rem;
+    background: rgb(255, 255, 238);
+    border: 2px solid rgb(36, 38, 34);
+}
+
+.play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

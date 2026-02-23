@@ -7,6 +7,8 @@ let secondCard = null;
 let lockBoard = false;
 let curr_r;
 let curr_c;
+let move_counter;
+let time = 0;
 
 const cardColors = [
     '#d7d9b1', '#84acce', '#114b5f', '#1a936f', '#ff6663',
@@ -16,6 +18,7 @@ const cardColors = [
 updateSize(3, 4);
 
 function updateSize(rows, cols) {
+    move_counter = 0;
     curr_r = rows;
     curr_c = cols;
     reset();
@@ -23,7 +26,13 @@ function updateSize(rows, cols) {
     gameContainer.innerHTML = '';
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
-    overlay.innerHTML = '<p class = "message">You Won!<p><button class = "play-button" onclick="playAgain()">Play Again</button>';
+    overlay.innerHTML = `
+    <p class = "message"><p>
+    <button class = "play-button" onclick= "playAgain()">
+        <div class = "top"> Play Again </div>
+        <div class = "bottom"></div>
+    </button>'
+    `;
     gameContainer.appendChild(overlay);
     document.documentElement.style.setProperty('--grid-cols', cols);
     document.documentElement.style.setProperty('--grid-rows', rows);
@@ -106,6 +115,7 @@ function reset() {
 function checkMatch() {
     const first = firstCard.querySelector('.card-back');
     const second = secondCard.querySelector('.card-back');
+    move_counter++;
 
     if (first.style.background === second.style.background) {
         firstCard.classList.add('matched');
@@ -130,11 +140,12 @@ function gameOver() {
     // Match like cards together, show you beat the game screen!
     setTimeout(() => {
         document.querySelectorAll('.card').forEach(card => {
-            card.querySelector('.card-front').style.background = "color-mix(in srgb, var(--accent) 60%, white)";
+            card.querySelector('.card-front').style.background = "#f7f7f8";
             card.querySelector('.card-front').textContent = "";
             card.classList.remove('flipped');
         });
         setTimeout(() => {
+            gameContainer.querySelector('.message').textContent = `Completed in ${move_counter} moves and ${time} seconds!`;
             gameContainer.classList.add('completed');
         }, 700);
     }, 1500); // for now
