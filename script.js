@@ -5,6 +5,8 @@ let currentNum = 0;
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let curr_r;
+let curr_c;
 
 const cardColors = [
     '#d7d9b1', '#84acce', '#114b5f', '#1a936f', '#ff6663',
@@ -14,9 +16,15 @@ const cardColors = [
 updateSize(3, 4);
 
 function updateSize(rows, cols) {
+    curr_r = rows;
+    curr_c = cols;
     reset();
     numCorrect = 0;
     gameContainer.innerHTML = '';
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.innerHTML = '<p class = "message">You Won!<p><button class = "play-button" onclick="playAgain()">Play Again</button>';
+    gameContainer.appendChild(overlay);
     document.documentElement.style.setProperty('--grid-cols', cols);
     document.documentElement.style.setProperty('--grid-rows', rows);
 
@@ -92,6 +100,7 @@ function reset() {
     firstCard = null;
     secondCard = null;
     lockBoard = false;
+    gameContainer.classList.remove('completed');
 }
 
 function checkMatch() {
@@ -121,7 +130,7 @@ function gameOver() {
     // Match like cards together, show you beat the game screen!
     setTimeout(() => {
         document.querySelectorAll('.card').forEach(card => {
-            card.querySelector('.card-front').style.background = "var(--accent)";
+            card.querySelector('.card-front').style.background = "color-mix(in srgb, var(--accent) 60%, white)";
             card.querySelector('.card-front').textContent = "";
             card.classList.remove('flipped');
         });
@@ -129,6 +138,9 @@ function gameOver() {
             gameContainer.classList.add('completed');
         }, 700);
     }, 1500); // for now
-    
     return;
+}
+
+function playAgain() {
+    updateSize(curr_r, curr_c);
 }
