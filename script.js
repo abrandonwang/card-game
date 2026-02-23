@@ -1,14 +1,15 @@
 const gameContainer = document.getElementById('game-container');
 let totalCards;
 let numCorrect;
-let currentNum = 0;
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
 let curr_r;
 let curr_c;
 let move_counter;
-let time = 0;
+let startTime;
+let timerInterval;
+let time;
 
 const cardColors = [
     '#d7d9b1', '#84acce', '#114b5f', '#1a936f', '#ff6663',
@@ -18,7 +19,15 @@ const cardColors = [
 updateSize(3, 4);
 
 function updateSize(rows, cols) {
+    clearInterval(timerInterval);
+    startTime = Date.now();
+    document.getElementById('timer').innerHTML = `0 s`;
+    timerInterval = setInterval(() => {
+        time = Math.floor((Date.now() - startTime) / 1000);
+        document.getElementById('timer').innerHTML = `${time} s`;
+    }, 1000);
     move_counter = 0;
+    document.getElementById('moves').innerHTML = `0 m`;
     curr_r = rows;
     curr_c = cols;
     reset();
@@ -27,11 +36,11 @@ function updateSize(rows, cols) {
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
     overlay.innerHTML = `
-    <p class = "message"><p>
+    <p class = "message"></p>
     <button class = "play-button" onclick= "playAgain()">
         <div class = "top"> Play Again </div>
         <div class = "bottom"></div>
-    </button>'
+    </button>
     `;
     gameContainer.appendChild(overlay);
     document.documentElement.style.setProperty('--grid-cols', cols);
@@ -69,24 +78,24 @@ function updateSize(rows, cols) {
         })
         gameContainer.appendChild(card);
     }
-    let color_arr = [];
-    let my_dict = {}
+    let colorArray = [];
+    let usedColors = {}
     for (let i = 0; i < (totalCards / 2); i++) {
         let card_color;
         do {
             card_color = Math.floor(Math.random() * 15);
-        } while (card_color in my_dict);
-        my_dict[card_color] = true;  // mark as used
-        color_arr.push(card_color);
-        color_arr.push(card_color);
+        } while (card_color in usedColors);
+        usedColors[card_color] = true;  // mark as used
+        colorArray.push(card_color);
+        colorArray.push(card_color);
     }
 
-    fisher_yates(color_arr);
+    fisher_yates(colorArray);
     const cards = gameContainer.querySelectorAll('.card');
     for (let i = 0; i < totalCards; i++) {
         const cardBack = cards[i].querySelector('.card-back');
-        cardBack.style.background = cardColors[color_arr[i]];
-        cardBack.textContent = cardColors[color_arr[i]];
+        cardBack.style.background = cardColors[colorArray[i]];
+        cardBack.textContent = cardColors[colorArray[i]];
     }
 }
 
@@ -101,10 +110,6 @@ function fisher_yates (arr) {
     return arr;
 }
 
-function toggle() {
-    document.querySelector('.drop-down').classList.toggle('open');
-}
-
 function reset() {
     firstCard = null;
     secondCard = null;
@@ -116,6 +121,7 @@ function checkMatch() {
     const first = firstCard.querySelector('.card-back');
     const second = secondCard.querySelector('.card-back');
     move_counter++;
+    document.getElementById('moves').innerHTML = `${move_counter} m`;
 
     if (first.style.background === second.style.background) {
         firstCard.classList.add('matched');
@@ -139,6 +145,7 @@ function checkMatch() {
 function gameOver() {
     // Match like cards together, show you beat the game screen!
     setTimeout(() => {
+        clearInterval(timerInterval);
         document.querySelectorAll('.card').forEach(card => {
             card.querySelector('.card-front').style.background = "#f7f7f8";
             card.querySelector('.card-front').textContent = "";
@@ -149,7 +156,6 @@ function gameOver() {
             gameContainer.classList.add('completed');
         }, 700);
     }, 1500); // for now
-    return;
 }
 
 function playAgain() {
