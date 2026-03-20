@@ -1,41 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/site.webmanifest">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concentration</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
 </head>
-
 <body>
-    <header>
-        <div class = "nav-container">
-            <div class = "drop-down">
-                <button onclick = "updateSize(3,4)" href="#">
-                    <div class = "top"> Easy </div>
-                    <div class = "bottom"></div>
-                </button>
-                <button onclick = "updateSize(4,4)" href="#">
-                    <div class = "top"> Normal </div>
-                    <div class = "bottom"></div>
-                </button>
-                <button onclick = "updateSize(4,5)" href="#">
-                    <div class = "top"> Hard </div>
-                    <div class = "bottom"></div>
-                </button>
-            </div>
-        </div>
-    </header>
-    <div class = "stats-bar">
-        <span id = "moves">0 m</span>
-        <span id = "timer">0 s</span>
-    </div>
-    <div id = "game-container" class = "game-container"> 
-    </div>
-    <script src="script.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

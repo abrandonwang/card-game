@@ -1,0 +1,190 @@
+@font-face {
+  font-family: "Satoshi";
+  src: url("../../Satoshi_complete/OTF/Satoshi-Regular.otf") format("opentype"),
+       url("../../Satoshi_complete/TTF/Satoshi-Variable.ttf") format("truetype");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --text: #111111;
+  --muted: #999999;
+  --border: rgba(0,0,0,0.09);
+}
+
+body {
+  font-family: "Satoshi", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  min-height: 100dvh;
+  color: var(--text);
+  user-select: none;
+}
+
+/* Home Screen */
+.home {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.home-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 2.5rem;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.game-tile {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem 1.2rem;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  text-align: left;
+}
+
+.game-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.18);
+}
+
+.game-tile-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+}
+
+.game-tile-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Game wrapper */
+.game-wrapper {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.game-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.game-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.back-btn:hover { color: var(--text); }
+
+.game-topbar-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.game-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Shared pill button */
+.pill {
+  padding: 0.28rem 0.8rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pill:hover:not(.active) {
+  border-color: rgba(0,0,0,0.2);
+  color: var(--text);
+}
+
+.pill.active {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+
+/* Shared action button */
+.action-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.action-btn:hover {
+  background: var(--bg);
+  border-color: rgba(0,0,0,0.18);
+}
+
+.action-btn.primary {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+
+.action-btn.primary:hover {
+  opacity: 0.88;
+}
+
+/* Stats inline */
+.stat {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat strong {
+  color: var(--text);
+  font-weight: 700;
+}
