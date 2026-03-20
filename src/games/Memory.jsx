@@ -100,21 +100,19 @@ export default function Memory() {
 
   return (
     <div className="game-wrapper">
-      <div className="game-topbar">
-        <div className="game-topbar-left">
-          <span className="game-topbar-title">Memory</span>
-          <div style={{ display: 'flex', gap: '0.35rem' }}>
-            {DIFFICULTIES.map((d, i) => (
-              <button key={i} className={`pill ${diff === i ? 'active' : ''}`} onClick={() => changeDiff(i)}>
-                {d.label}
-              </button>
-            ))}
-          </div>
+      <div className="mem-topbar">
+        <div className="mem-pills">
+          {DIFFICULTIES.map((d, i) => (
+            <button key={i} className={`pill ${diff === i ? 'active' : ''}`} onClick={() => changeDiff(i)}>
+              {d.label}
+            </button>
+          ))}
         </div>
-        <div className="game-topbar-right">
-          <span className="stat"><strong>{moves}</strong> moves</span>
-          <span className="stat" style={{ marginLeft: '0.5rem' }}><strong>{fmt(elapsed)}</strong></span>
-          <button className="action-btn" style={{ marginLeft: '0.25rem' }} onClick={() => newGame()}>New</button>
+        <div className="mem-stats">
+          <span className="mem-stat"><strong>{moves}</strong> m</span>
+          <span className="mem-sep">·</span>
+          <span className="mem-stat"><strong>{fmt(elapsed)}</strong></span>
+          <button className="mem-new-btn" onClick={() => newGame()}>New</button>
         </div>
       </div>
 

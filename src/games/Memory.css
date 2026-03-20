@@ -1,11 +1,74 @@
+/* ─── TOPBAR ─── */
+
+.mem-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+  gap: 0.5rem;
+}
+
+.mem-pills {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.mem-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.mem-stat {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.mem-stat strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.mem-sep {
+  color: var(--border);
+  font-size: 0.8rem;
+  margin: 0 0.1rem;
+}
+
+.mem-new-btn {
+  margin-left: 0.35rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.mem-new-btn:hover {
+  color: var(--text);
+  border-color: rgba(0,0,0,0.2);
+}
+
+/* ─── GRID ─── */
+
 .memory-grid {
   flex: 1;
   min-height: 0;
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
-  gap: clamp(0.4rem, 1.5vw, 0.9rem);
-  padding: 1rem 1.25rem 1.25rem;
+  gap: clamp(0.35rem, 1.5vw, 0.85rem);
+  padding: clamp(0.6rem, 2vw, 1.25rem);
   position: relative;
   transition: gap 0.55s cubic-bezier(0.4,0,0.2,1), padding 0.55s;
 }
@@ -21,10 +84,13 @@
   min-width: 0;
   min-height: 0;
   transition: transform 0.18s ease;
+  touch-action: manipulation;
 }
 
-.memory-card:not(.flipped):not(.matched):hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .memory-card:not(.flipped):not(.matched):hover {
+    transform: translateY(-2px);
+  }
 }
 
 .memory-card.matched {

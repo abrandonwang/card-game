@@ -20,9 +20,11 @@ body {
   margin: 0;
   padding: 0;
   background: var(--bg);
-  min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
   color: var(--text);
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Home Screen */
@@ -74,9 +76,9 @@ body {
   line-height: 1.4;
 }
 
-/* Game wrapper */
 .game-wrapper {
   height: 100dvh;
+  height: 100svh; /* iOS Safari safe fallback */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -148,7 +150,6 @@ body {
   border-color: var(--text);
 }
 
-/* Shared action button */
 .action-btn {
   padding: 0.35rem 0.9rem;
   border-radius: 999px;
@@ -177,7 +178,6 @@ body {
   opacity: 0.88;
 }
 
-/* Stats inline */
 .stat {
   font-size: 0.82rem;
   color: var(--muted);
